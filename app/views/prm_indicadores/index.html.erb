@@ -1,0 +1,37 @@
+<% content_for :header_tags do %>
+	<%= javascript_tag do %>
+		<% ActiveRecord::Base.include_root_in_json = false %>
+		window.projects = <%= raw Project.visible.to_json %>
+		window.trackers =   <%= raw Tracker.all.to_json %>
+		window.customfields = <%= raw CustomField.all.to_json %>
+		window.customValues = <%= raw CustomValue.all.to_json %>
+		window.statuses = <%= raw IssueStatus.all.to_json %>
+		window.timeEntries = <%= raw TimeEntry.visible.to_json %>
+		window.issues = <%= raw Issue.visible.to_json %>
+		var require = {
+			waitSeconds: 0
+		};
+	<% end %>
+	<%= stylesheet_link_tag 'app', :plugin => 'promove' %>
+    <%= javascript_include_tag 'require', :plugin => 'promove', 'data-main' => '/redmine/plugin_assets/promove/main.js' %>
+<% end %>
+
+<div id="prm_content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar" data-ng-include="'/redmine/plugin_assets/promove/app/pages/sidebar.tpl.html'">
+				<p>Carregando....</p>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view  autoscroll="true">
+			   <p>Carregando....</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= javascript_tag do %>
+	$(document).ready(function(){
+		$("#header").hide();
+		$("#footer").hide();
+	})
+<% end %>

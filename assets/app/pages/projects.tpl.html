@@ -1,0 +1,78 @@
+﻿<section>
+    <h1 class="page-header">Acompanhamento de Projetos</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><a href="" ng-click="predicate = 'ProjetoPai'; reverse=!reverse">Projeto Pai</a></th>
+                    <th><a href="" ng-click="predicate = 'Nome'; reverse=!reverse">Projeto</a></th>
+                    <th><a href="" ng-click="predicate = 'CPI'; reverse=!reverse">CPI</a></th>
+                    <th><a href="" ng-click="predicate = 'SPI'; reverse=!reverse">SPI</a></th>
+                    <th><a href="" ng-click="predicate = 'PercentualAndamento'; reverse=!reverse">% And</a></th>
+                    <th><a href="" ng-click="predicate = 'PercentualHrsGastas'; reverse=!reverse">% Hrs</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="project in projects | filter:query | orderBy:predicate:reverse">
+                    <td><a ng-click="selectProject(project.Id)" href="">{{project.ProjetoPai}}</a></td>
+                    <td><a ng-click="selectProject(project.Id)" href="">{{project.Nome}}</a></td>
+                    <td>{{project.CPI}}</td>
+                    <td>{{project.SPI}}</td>
+                    <td>{{project.PercentualAndamento}}</td>
+                    <td>{{project.PercentualHrsGastas}}</td>
+                </tr>
+                <tr ng-show="false">
+                    <td colspan="6"><!--This is a dummy because the extra row screws css--></td>
+                </tr>
+                <tr ng-show="selectedProject.Id == project.Id" ng-repeat-end="">
+                    <td colspan="6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-striped" style="margin-bottom:0px;">
+                                    <tbody>
+                                        <tr>
+                                            <td>Esforço Estimado</td>
+                                            <td>{{project.EsforcoEstimado}}</td>
+                                            <td>Saldo de Horas</td>
+                                            <td>{{project.SaldoHoras}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Esforço Realizado</td>
+                                            <td>{{project.EsforcoRealizado}}</td>
+                                            <td>Desvio Custo</td>
+                                            <td>{{project.DesvioCusto}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tamanho</td>
+                                            <td>{{project.Tamanho}}</td>
+                                            <td>Desvio Prazo</td>
+                                            <td>{{project.DesvioPrazo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tamanho Agregado</td>
+                                            <td>{{project.TamanhoAgregado}}</td>
+                                            <td>Valor Agregado</td>
+                                            <td>{{project.ValorAgregado}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Defeitos</td>
+                                            <td>{{project.Defeitos}}</td>
+                                            <td>Não Conformidades</td>
+                                            <td>{{project.NaoConformidades}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Densidade de Defeitos</td>
+                                            <td>{{project.DDP}}</td>
+                                            <td>Densidade de NC's</td>
+                                            <td>{{project.DNCP}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,7 @@
+﻿<div ng-controller="SidebarController">
+    <ul class="nav nav-sidebar">
+        <li ng-class="{active:isActive('/')}"><a href="#">Overview</a></li>
+        <li ng-class="{active:isActive('/projects')}"><a href="#/projects">Projetos</a></li>
+        <li ng-repeat="tracker in trackers" ng-class="{active:isActive('/tracker/' + tracker.Id)}"><a href="#/tracker/{{tracker.Id}}">{{tracker.Name}}</a></li>
+    </ul>
+</div>
