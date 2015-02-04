@@ -9,6 +9,6 @@ Redmine::Plugin.register :promove do
   # syntax is:
   # menu(menu_name, item_name, url, options={})
   menu :top_menu, :indicadores , { :controller => 'prm_indicadores', :action => 'index'}, :caption => 'Indicadores'
-  menu :top_menu, :templates, "http://redmine.promovesolucoes.com/redmine/projects/biblioteca-de-ativos/wiki/Templates", :caption => 'Templates'
+  # menu :top_menu, :templates, "http://yourredmine.com/redmine/projects/biblioteca-de-ativos/wiki/Templates", :caption => 'Templates'
 
 end
