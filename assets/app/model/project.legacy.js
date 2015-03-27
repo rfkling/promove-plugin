@@ -129,6 +129,9 @@
 
         self.SPI = (self.ValorPlanejado > 0) ? (self.ValorAgregado / self.ValorPlanejado).toFixed(2) : 0;
 
+        self.TamanhoAgregado = self.EsforcoEstimado != 0 ? ((self.ValorAgregado / self.EsforcoEstimado) * self.Tamanho).toFixed(2) : "0";
+
+
         self.NaoConformidades = naoConformidades.length;
 
         self.NaoConformidadesStatus = function () {
@@ -147,7 +150,7 @@
 
         self.NaoConformidadesRetrabalho = (self.EsforcoRealizado > 0) ? ((self.NaoConformidadesEsforco / self.EsforcoRealizado) * 100).toFixed(0) : 0;
 
-        self.DNCP = (self.Tamanho > 0) ? (self.NaoConformidades / self.Tamanho).toFixed(2) : 0;
+        self.DNCP = (self.TamanhoAgregado > 0) ? (self.NaoConformidades / self.TamanhoAgregado).toFixed(2) : 0;
 
         self.Defeitos = defeitos.length;
 
@@ -167,7 +170,7 @@
 
         self.DefeitosRetrabalho = (self.EsforcoRealizado > 0) ? ((self.DefeitosEsforco / self.EsforcoRealizado) * 100).toFixed(0) : 0;
 
-        self.DDP = (self.Tamanho > 0) ? (self.Defeitos / self.Tamanho).toFixed(2) : 0;
+        self.DDP = (self.TamanhoAgregado > 0) ? (self.Defeitos / self.TamanhoAgregado).toFixed(2) : 0;
 
         self.Melhorias = melhorias.length;
 
@@ -225,7 +228,6 @@
             return arr;
         }();
 
-        self.TamanhoAgregado = self.EsforcoEstimado != 0 ? ((self.ValorAgregado / self.EsforcoEstimado) * self.Tamanho).toFixed(2) : "0";
 
         self.EsforcoAnaliseProjeto = function () {
             return Enumerable.from(self.Issues)

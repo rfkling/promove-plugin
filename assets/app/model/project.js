@@ -28,6 +28,8 @@
         self.ValorPlanejado = _.reduce(self.Issues, function (memo, num) { return memo + num.ValorPlanejado; }, 0).toFixed(2);
         self.ValorAgregado = _.reduce(self.Issues, function (memo, num) { return memo + num.ValorAgregado; }, 0).toFixed(2);
         self.Tamanho = _.reduce(self.Issues, function (memo, num) { return memo + num.Tamanho; }, 0).toFixed(2);
+        self.TamanhoAgregado = self.EsforcoEstimado != 0 ? ((self.ValorAgregado / self.EsforcoEstimado) * self.Tamanho).toFixed(2) : 0;
+
 
         self.Defeitos = _.reduce(self.Issues, function (memo, issue) {
             if (_.indexOf(['Defeito', 'Bug'], issue.Tipo) > -1)
@@ -43,11 +45,10 @@
 
         self.CPI = (self.EsforcoRealizado > 0) ? (self.ValorAgregado / self.EsforcoRealizado).toFixed(2) : 0;
         self.SPI = (self.ValorPlanejado > 0) ? (self.ValorAgregado / self.ValorPlanejado).toFixed(2) : 0;
-        self.DDP = (self.Tamanho > 0) ? (self.Defeitos / self.Tamanho).toFixed(2) : 0;
-        self.DNCP = (self.Tamanho > 0) ? (self.NaoConformidades / self.Tamanho).toFixed(2) : 0;
+        self.DDP = (self.TamanhoAgregado > 0) ? (self.Defeitos / self.TamanhoAgregado).toFixed(2) : 0;
+        self.DNCP = (self.TamanhoAgregado > 0) ? (self.NaoConformidades / self.TamanhoAgregado).toFixed(2) : 0;
         self.PercentualAndamento = (self.EsforcoEstimado > 0) ? ((self.ValorAgregado / self.EsforcoEstimado) * 100).toFixed(2) : 0;
         self.PercentualHrsGastas = (self.EsforcoEstimado > 0) ? ((self.EsforcoRealizado / self.EsforcoEstimado) * 100).toFixed(2) : 0;
-        self.TamanhoAgregado = self.EsforcoEstimado != 0 ? ((self.ValorAgregado / self.EsforcoEstimado) * self.Tamanho).toFixed(2) : 0;
 
         self.SaldoHoras = (self.EsforcoEstimado - self.EsforcoRealizado).toFixed(2);
         self.DesvioPrazo = (self.ValorAgregado - self.ValorPlanejado).toFixed(2);
